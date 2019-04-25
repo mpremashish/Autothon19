@@ -14,21 +14,6 @@ import java.util.*;
 
 public class JsonCollector {
 
-    private static List<Integer> findFibonacci(int num) {
-        List<Integer> al = new ArrayList<>();
-        int a = 0;
-        int b = 1;
-        int next;
-        al.add(a);
-        al.add(b);
-        for (int i = 0; i < num - 2; i++) {
-            next = a + b;
-            al.add(next);
-            a = b;
-            b = next;
-        }
-        return al;
-    }
 
     public static Stack<JsonDataObject> findJsonObjects() {
         Stack<JsonDataObject> jsonDataObjects = new Stack<JsonDataObject>();

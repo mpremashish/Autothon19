@@ -1,22 +1,36 @@
-//package JsonCollector;
-//
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import cucumber.api.java.it.Ma;
-//import twitter4j.*;
-//import twitter4j.conf.*;
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.testng.annotations.Test;
-//
-//
-//import java.io.FileWriter;
-//import java.io.IOException;
-//import java.util.*;
-//
-//public class JsonCollectorJava {
-//    public static void main(String[] args) {
+package JsonCollector;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import cucumber.api.java.it.Ma;
+import org.openqa.selenium.WebElement;
+import twitter4j.*;
+import twitter4j.conf.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+
+public class JsonCollectorJava {
+    public static void main(String[] args) {
+//        String FilePath = "C:\\Users\\sgulyani\\Documents\\TCW\\screenshots\\security\\kanban q2\\PROD_65600";
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
+        String baseUrl = "https://cgi-lib.berkeley.edu/ex/fup.html";
+        WebDriver driver = new ChromeDriver();
+        driver.get(baseUrl);
+        WebElement uploadElement = driver.findElement(By.xpath("//input[contains(@type, 'file')]"));
+        // enter the file path onto the file-selection input field
+        uploadElement.sendKeys(Paths.get("./target/api.json").toAbsolutePath().toString());
+        // click the "Press" button
+        driver.findElement(By.xpath("//input[contains(@value, 'Press')]")).click();
 //        ConfigurationBuilder cb = new ConfigurationBuilder();
 //        cb.setOAuthConsumerKey("3QHsalYXMeQchpOhwZWc2HfrC");
 //        cb.setOAuthConsumerSecret("sDE8sk6kj0aegjy2fLIZXV5oZRZY5AOH6XcX1LcyYP0tjjNqXT");
@@ -149,21 +163,21 @@
 //
 //        JSONObject employeeObject2 = new JSONObject();
 //        employeeObject2.put("employee", employeeDetails2);
+
+        //Add employees to list
+//        JSONArray employeeList = new JSONArray();
+//        employeeList.add(employeeObject);
+//        employeeList.add(employeeObject2);
+
+//        //Write JSON file
+//        try (FileWriter file = new FileWriter("employees.json")) {
 //
-//        //Add employees to list
-////        JSONArray employeeList = new JSONArray();
-////        employeeList.add(employeeObject);
-////        employeeList.add(employeeObject2);
+//            file.write(employeeList.toJSONString());
+//            file.flush();
 //
-////        //Write JSON file
-////        try (FileWriter file = new FileWriter("employees.json")) {
-////
-////            file.write(employeeList.toJSONString());
-////            file.flush();
-////
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-//
-//    }
-//}
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+    }
+}

@@ -8,24 +8,27 @@ import java.util.ArrayList;
 
 @Data
 public class ApiInfo {
-    String assertv="pass";
-    int retweet_count;
-    int like_Count;
-    ArrayList<String> hashtag_Count;
-    Device device;
+    int top_retweet_count;
+    int top_like_count;
+    ArrayList<String> top_10_hashtag;
+    ArrayList<JsonDataObject> biographies;
 
 
     public String toString(String type) {
+        String assertv="pass";
         if (type.contains("tweet"))
-        return "##Test Mode" + type + ",##Value=" + this.retweet_count +",##assertresult"+this.assertv+ ",## device=" + this.getDevice();
+        return "Test Mode" + type + ",##Value=" + this.top_retweet_count +",##assertresult"+assertv+ ",## device=" +System.getProperty("threadsName");
         else if (type.contains("like")){
-            return "##Test Mode" + type + ",##Value=" + this.like_Count +",##assertresult"+this.assertv+ ",## device=" + this.getDevice();
+            return "Test Mode" + type + ",##Value=" + this.top_like_count +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
+        }
+        else if (type.contains("hash")){
+            return "Test Mode" + type + ",##Value=" + top_10_hashtag +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
         }
         else if (type.contains("ui")){
-            return "##Test Mode" + type + ",##Value=" + "UI" +",##assertresult"+this.assertv+ ",## device=" + this.getDevice();
+            return "Test Mode" + type + ",##Value=" + this.biographies +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
         }
         else {
-            return "##Test Mode" + type + ",##Value=" + "null" +",##assertresult"+"fail"+ ",## device=" + this.getDevice();
+            return "Test Mode" + type + ",##Value=" + "null" +",##assertresult"+"fail"+ ",## device=" + System.getProperty("threadsName");
         }
     }
 

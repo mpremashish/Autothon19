@@ -114,9 +114,9 @@ public abstract class TestCase extends TestBaseManager {
             Counter=Counter+1;
         }
 
-        apiInfo.setLike_Count(Likehighest);
-        apiInfo.setRetweet_count(retweethighest);
-        apiInfo.setHashtag_Count(hashtagl);
+        apiInfo.setTop_like_count(Likehighest);
+        apiInfo.setTop_retweet_count(retweethighest);
+        apiInfo.setTop_10_hashtag(hashtagl);
     }
 
     public void setTimeout(long timeout) {
@@ -133,7 +133,7 @@ public abstract class TestCase extends TestBaseManager {
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
         log.info("Running TestExecutionSetUp (before suite)");
-        jsonStack = JsonCollector.findJsonObjects();
+//        jsonStack = JsonCollector.findJsonObjects();
     }
 
 

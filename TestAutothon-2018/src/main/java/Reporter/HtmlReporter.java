@@ -119,7 +119,7 @@ public class HtmlReporter implements TestReporter {
             else htmlLogTable.addTableRow(curDate + "##" + escapedString, cssClass);
     }
 
-    public void addStepRow_movies(String logObject, boolean takeScreenshot) {
+    public void addStepRow(String logObject, boolean takeScreenshot) {
         String curDate = getDateForReport();
         String escapedString = StringUtils.replace(StringEscapeUtils.escapeHtml3(logObject), "\n", "<br>");
         File screenshotFile = null;
