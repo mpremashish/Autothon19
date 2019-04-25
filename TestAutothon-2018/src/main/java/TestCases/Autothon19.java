@@ -64,7 +64,7 @@ public class Autothon19 extends TestCase {
         log.info(apiInfo.getTop_like_count());
         log.info(apiInfo.getTop_retweet_count());
         log.info(apiInfo.getTop_10_hashtag());
-        Assert.assertTrue(apiInfo.getTop_retweet_count()>0&&apiInfo.getTop_like_count()>0&&apiInfo.getTop_10_hashtag().size()>10);
+        Assert.assertTrue(apiInfo.getTop_retweet_count()>0&&apiInfo.getTop_like_count()>0&&apiInfo.getTop_10_hashtag().size()<=10);
         report.addStepRow(apiInfo.toString("api-tweet"),false);
         report.addStepRow(apiInfo.toString("api-like"),false);
         report.addStepRow(apiInfo.toString("api-hash"),false);
