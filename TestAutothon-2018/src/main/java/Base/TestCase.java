@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import JsonCollector.*;
+import Reporter.HtmlReporter;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -71,7 +73,7 @@ public abstract class TestCase extends TestBaseManager {
 //        return pair;
 //    }
 
-    public void CalminRetweetminLikeHash(String screename) throws TwitterException {
+    public void CalminRetweetminLikeHash(String screename, HtmlReporter reporter) throws TwitterException {
         int retweethighest=0;
         int Likehighest=0;
         HashMap<String,Integer> hashtag = new HashMap<>();
@@ -79,6 +81,7 @@ public abstract class TestCase extends TestBaseManager {
         Paging paging = new Paging(1, 50);
         List<Status> statuses = twitter.getUserTimeline(
                 screename, paging);
+            Assert.assertTrue(statuses.size()>0);
         for (Status status : statuses) {
             if (retweethighest<status.getRetweetCount()){
                 retweethighest=status.getRetweetCount();

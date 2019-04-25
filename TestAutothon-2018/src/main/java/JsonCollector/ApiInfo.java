@@ -17,18 +17,18 @@ public class ApiInfo {
     public String toString(String type) {
         String assertv="pass";
         if (type.contains("tweet"))
-        return "Test Mode" + type + ",##Value=" + this.top_retweet_count +",##assertresult"+assertv+ ",## device=" +System.getProperty("threadsName");
+        return "" + type.toUpperCase() + "##Value=" + this.top_retweet_count +"##"+assertv+ "## device=" +System.getProperty("threadsName");
         else if (type.contains("like")){
-            return "Test Mode" + type + ",##Value=" + this.top_like_count +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
+            return "" + type + "##Value=" + this.top_like_count +"##"+assertv+ "## device=" + System.getProperty("threadsName");
         }
         else if (type.contains("hash")){
-            return "Test Mode" + type + ",##Value=" + top_10_hashtag +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
+            return "" + type.toUpperCase() + "##Value=" + top_10_hashtag +"##"+assertv+ "## device=" + System.getProperty("threadsName");
         }
         else if (type.contains("ui")){
-            return "Test Mode" + type + ",##Value=" + this.biographies +",##assertresult"+assertv+ ",## device=" + System.getProperty("threadsName");
+            return "" + type.toUpperCase() + "##Value=" + this.biographies +"##"+assertv+ "## device=" + System.getProperty("threadsName");
         }
         else {
-            return "Test Mode" + type + ",##Value=" + "null" +",##assertresult"+"fail"+ ",## device=" + System.getProperty("threadsName");
+            return "" + type.toUpperCase() + "##Value=" + "null" +"##"+"fail"+ "## device=" + System.getProperty("threadsName");
         }
     }
 

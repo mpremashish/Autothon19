@@ -2,12 +2,12 @@
 
 <suite name="test" verbose="2" parallel="instances" thread-count="20" configfailurepolicy="continue">
 
-    <!--<listeners>-->
+    <listeners>
         <!--<listener class-name="Listener.ExtentReport"></listener>-->
+        <listener class-name="Listener.HtmlListener"></listener>
+        <!--<listener class-name="Listener.RetryListener"></listener>-->
 
-        <!--&lt;!&ndash;<listener class-name="Listener.RetryListener"></listener>&ndash;&gt;-->
-
-    <!--</listeners>-->
+    </listeners>
 
     <test name="Run Test Execution via factory design patten Suites A" >
         <parameter name="testCaseName" value="Autothon19"/>

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 import JsonCollector.JsonDataObject;
+import Listener.HtmlListener;
 import Listener.Retry;
 import Reporter.HtmlReporter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +18,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -40,6 +42,8 @@ import twitter4j.Status;
 public class Autothon19 extends TestCase {
     public static HtmlReporter report = null;
     private static Logger log = Logger.getLogger(Class.class.getName());
+    ObjectUtils uiobj;
+    HtmlListener lis = new HtmlListener();
 
     public Autothon19(Device thread) {
         super(thread);
@@ -50,15 +54,17 @@ public class Autothon19 extends TestCase {
         report = new HtmlReporter(context.getCurrentXmlTest().getName());
         report.setTestSuiteHeader("Test Suite: " + context.getCurrentXmlTest().getName());
         report.addStepRow("Test Mode##Value##assertresult##Device", "warn", false);
+        lis.setreport(report);
     }
 
     @Test
     public void TestApi(){
         try {
-        CalminRetweetminLikeHash("stepin_forum");
+        CalminRetweetminLikeHash("stepin_forum",report);
         log.info(apiInfo.getTop_like_count());
         log.info(apiInfo.getTop_retweet_count());
         log.info(apiInfo.getTop_10_hashtag());
+        Assert.assertTrue(apiInfo.getTop_retweet_count()>0&&apiInfo.getTop_like_count()>0&&apiInfo.getTop_10_hashtag().size()>10);
         report.addStepRow(apiInfo.toString("api-tweet"),false);
         report.addStepRow(apiInfo.toString("api-like"),false);
         report.addStepRow(apiInfo.toString("api-hash"),false);
@@ -73,52 +79,59 @@ public class Autothon19 extends TestCase {
         setDriver();
         setTimeout(10);
         ArrayList<JsonDataObject> jslist=new ArrayList<JsonDataObject>();
+        uiobj = new ObjectUtils(driver,"uiobjects");
         driver.get("https://twitter.com/stepin_forum");
         setTimeout(100);
-        String name_first = driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[1]/strong")).getText();
-        driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[1]")).click();
+        uiobj.getElement("NameFirst");
+        String name_first = uiobj.getElement("NameFirst").getText();
+        uiobj.getElement("FirstUser").click();
 
-        String handle_name_first = driver.findElement(By.xpath("//h2[contains(@class,'ProfileHeaderCard-screenname u-inlineBlock')]/a")).getText();
-        String following_count_first = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[2]/a/span[3]")).getText();
-        String followers_count_first = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[3]/a/span[3]")).getText();
+        String handle_name_first = uiobj.getElement("HandleNameFirst").getText();
+        String following_count_first = uiobj.getElement("FollowingCountFirst").getText();
+        String followers_count_first = uiobj.getElement("FollowersCountFirst").getText();
+
         jslist.add(new JsonDataObject(name_first,handle_name_first,followers_count_first,following_count_first));
 
-        System.out.println("Name of the first people to follow:" + name_first);
-        System.out.println("Handle Name of the first people to follow:" + handle_name_first);
-        System.out.println("Following count of the first people:" + following_count_first);
-        System.out.println("Followers of the first people:" + followers_count_first);
+        log.info(name_first);
+        log.info(handle_name_first);
+        log.info(following_count_first);
+        log.info(followers_count_first);
 
         driver.navigate().back();
         //To fetch Second profile details
-        String name_second = driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[2]/strong")).getText();
+        String name_second = uiobj.getElement("NameSecond").getText();
 
-        driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[2]")).click();
+       uiobj.getElement("SecondUser").click();
 
-        String handle_name_second = driver.findElement(By.xpath("//h2[contains(@class,'ProfileHeaderCard-screenname u-inlineBlock')]/a")).getText();
-        String following_count_second = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[2]/a/span[3]")).getText();
-        String followers_count_second = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[3]/a/span[3]")).getText();
+        String handle_name_second = uiobj.getElement("HandleNameSecond").getText();
+        String following_count_second = uiobj.getElement("FollowingCountSecond").getText();
+        String followers_count_second = uiobj.getElement("FollowersCountSecond").getText();
+
         jslist.add(new JsonDataObject(name_second,handle_name_second,followers_count_second,following_count_second));
 
-        System.out.println("Name of the first second to follow:" + name_second);
-        System.out.println("Handle Name of the second people to follow:" + handle_name_second);
-        System.out.println("Following count of the second people:" + following_count_second);
-        System.out.println("Followers of the second people:" + followers_count_second);
+        log.info(name_second);
+        log.info(handle_name_second);
+        log.info(following_count_second);
+        log.info(followers_count_second);
+
 
         driver.navigate().back();
         //To fetch third profile details
-        String name_third = driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[3]")).getText();
+        String name_third = uiobj.getElement("NameThird").getText();
 
-        driver.findElement(By.xpath("(//span[contains(@class,'account-group-inner')])[3]")).click();
+        uiobj.getElement("ThirdUser").click();
 
-        String handle_name_third = driver.findElement(By.xpath("//h2[contains(@class,'ProfileHeaderCard-screenname u-inlineBlock')]/a")).getText();
-        String following_count_third = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[2]/a/span[3]")).getText();
-        String followers_count_third = driver.findElement(By.xpath("//ul[contains(@class,'ProfileNav-list')]/li[3]/a/span[3]")).getText();
+        String handle_name_third = uiobj.getElement("HandleNameThird").getText();
+        String following_count_third = uiobj.getElement("FollowingCountThird").getText();
+        String followers_count_third = uiobj.getElement("FollowersCountThird").getText();
 
         jslist.add(new JsonDataObject(name_third,handle_name_third,followers_count_third,following_count_third));
-        System.out.println("Name of the first second to follow:" + name_third);
-        System.out.println("Handle Name of the second people to follow:" + handle_name_third);
-        System.out.println("Following count of the second people:" + following_count_third);
-        System.out.println("Followers of the second people:" + followers_count_third);
+
+        log.info(name_third);
+        log.info(handle_name_third);
+        log.info(following_count_third);
+        log.info(followers_count_third);
+
         apiInfo.setBiographies(jslist);
         report.addStepRow(apiInfo.toString("ui"),true);
         driver.close();
@@ -128,15 +141,16 @@ public class Autothon19 extends TestCase {
     @Test
     public void TestPost() throws IOException, InterruptedException {
         setDriver();
+        uiobj = new ObjectUtils(driver,"uiobjects");
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File("target/api.json"),apiInfo );
         String baseUrl = "https://cgi-lib.berkeley.edu/ex/fup.html";
         driver.get(baseUrl);
-        WebElement uploadElement = driver.findElement(By.xpath("//input[contains(@type, 'file')]"));
+        WebElement uploadElement = uiobj.getElement("uploadurl");
         // enter the file path onto the file-selection input field
         uploadElement.sendKeys(Paths.get("./target/api.json").toAbsolutePath().toString());
         // click the "Press" button
-        driver.findElement(By.xpath("//input[contains(@value, 'Press')]")).click();
+        uiobj.getElement("uploadbtn").click();
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         report.addStepRow(apiInfo.toString("ui"),true);
         driver.close();
