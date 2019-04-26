@@ -2700,3 +2700,23 @@ remote stacktrace: UnknownError: An unknown server-side error occurred while pro
 2019-04-26 04:34:15 INFO  Class:132 - 452
 2019-04-26 04:34:15 INFO  Class:133 - 4,561
 2019-04-26 04:34:24 INFO  HtmlReporter:158 - Open Test Results: null\testHtmlReport_Run Test Execution via factory design patten Suites A_04262019_043353.html
+2019-04-26 08:44:55 INFO  InitFactory:25 - 0
+2019-04-26 08:44:55 INFO  InitFactory:26 - running thread for -> WEBCHROME : Autothon19
+2019-04-26 08:44:56 INFO  TestCase:138 - Running TestExecutionSetUp (before suite)
+2019-04-26 08:44:58 INFO  Class:64 - 9
+2019-04-26 08:44:58 INFO  Class:65 - 9
+2019-04-26 08:44:58 INFO  Class:66 - [DSTC2019, Testing, Bengaluru, TestAutothon2019, Conference, Testers, Contest, Workshop, Hackathon, STEPINSUMMIT2019]
+2019-04-26 08:45:09 INFO  Class:95 - Rahul Verma
+2019-04-26 08:45:09 INFO  Class:96 - @rahul_verma
+2019-04-26 08:45:09 INFO  Class:97 - 915
+2019-04-26 08:45:09 INFO  Class:98 - 1,831
+2019-04-26 08:45:13 INFO  Class:112 - vipul kocher
+2019-04-26 08:45:13 INFO  Class:113 - @vipulkocher
+2019-04-26 08:45:13 INFO  Class:114 - 3,127
+2019-04-26 08:45:13 INFO  Class:115 - 2,933
+2019-04-26 08:45:18 INFO  Class:130 - Ajay Balamurugadas 
+@ajay184f
+2019-04-26 08:45:18 INFO  Class:131 - @ajay184f
+2019-04-26 08:45:18 INFO  Class:132 - 453
+2019-04-26 08:45:18 INFO  Class:133 - 4,559
+2019-04-26 08:45:26 INFO  HtmlReporter:158 - Open Test Results: null\testHtmlReport_Run Test Execution via factory design patten Suites A_04262019_084456.html

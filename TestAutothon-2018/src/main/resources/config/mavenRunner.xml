@@ -3,7 +3,7 @@
 <suite name="test" verbose="2" parallel="instances" thread-count="20" configfailurepolicy="continue">
 
     <listeners>
-        <!--<listener class-name="Listener.ExtentReport"></listener>-->
+        <listener class-name="Listener.ExtentReport"></listener>
         <listener class-name="Listener.HtmlListener"></listener>
         <!--<listener class-name="Listener.RetryListener"></listener>-->
 
