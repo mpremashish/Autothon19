@@ -64,7 +64,7 @@ public class Autothon19 extends TestCase {
         log.info(apiInfo.getTop_like_count());
         log.info(apiInfo.getTop_retweet_count());
         log.info(apiInfo.getTop_10_hashtag());
-        Assert.assertTrue(apiInfo.getTop_retweet_count()>0&&apiInfo.getTop_like_count()>0&&apiInfo.getTop_10_hashtag().size()<=10);
+        Assert.assertTrue(apiInfo.getTop_retweet_count()>0&&apiInfo.getTop_like_count()>0&&apiInfo.getTop_10_hashtag().size()>10);
         report.addStepRow(apiInfo.toString("api-tweet"),false);
         report.addStepRow(apiInfo.toString("api-like"),false);
         report.addStepRow(apiInfo.toString("api-hash"),false);
@@ -76,66 +76,80 @@ public class Autothon19 extends TestCase {
 
     @Test
     public void TestGUI(){
-        setDriver();
-        setTimeout(10);
-        ArrayList<JsonDataObject> jslist=new ArrayList<JsonDataObject>();
-        uiobj = new ObjectUtils(driver,"uiobjects");
-        driver.get("https://twitter.com/stepin_forum");
-        setTimeout(100);
-        uiobj.getElement("NameFirst");
-        String name_first = uiobj.getElement("NameFirst").getText();
-        uiobj.getElement("FirstUser").click();
+        try {
+            setDriver();
+            setTimeout(10);
+            ArrayList<JsonDataObject> jslist = new ArrayList<JsonDataObject>();
+            uiobj = new ObjectUtils(driver, "uiobjects");
+            driver.get("https://twitter.com/stepin_forum");
+            setTimeout(100);
+            uiobj.getElement("NameFirst");
+            String name_first = uiobj.getElement("NameFirst").getText();
+            uiobj.getElement("FirstUser").click();
 
-        String handle_name_first = uiobj.getElement("HandleNameFirst").getText();
-        String following_count_first = uiobj.getElement("FollowingCountFirst").getText();
-        String followers_count_first = uiobj.getElement("FollowersCountFirst").getText();
+            Assert.assertTrue(uiobj.getElement("HandleNameFirst").isDisplayed());
+            String handle_name_first = uiobj.getElement("HandleNameFirst").getText();
 
-        jslist.add(new JsonDataObject(name_first,handle_name_first,followers_count_first,following_count_first));
+            Assert.assertTrue(uiobj.getElement("FollowingCountFirst").isDisplayed());
+            String following_count_first = uiobj.getElement("FollowingCountFirst").getText();
 
-        log.info(name_first);
-        log.info(handle_name_first);
-        log.info(following_count_first);
-        log.info(followers_count_first);
+            Assert.assertTrue(uiobj.getElement("FollowersCountFirst").isDisplayed());
+            String followers_count_first = uiobj.getElement("FollowersCountFirst").getText();
 
-        driver.navigate().back();
-        //To fetch Second profile details
-        String name_second = uiobj.getElement("NameSecond").getText();
+            jslist.add(new JsonDataObject(name_first, handle_name_first, followers_count_first, following_count_first));
 
-       uiobj.getElement("SecondUser").click();
+            log.info(name_first);
+            log.info(handle_name_first);
+            log.info(following_count_first);
+            log.info(followers_count_first);
 
-        String handle_name_second = uiobj.getElement("HandleNameSecond").getText();
-        String following_count_second = uiobj.getElement("FollowingCountSecond").getText();
-        String followers_count_second = uiobj.getElement("FollowersCountSecond").getText();
+            driver.navigate().back();
+            //To fetch Second profile details
+            String name_second = uiobj.getElement("NameSecond").getText();
 
-        jslist.add(new JsonDataObject(name_second,handle_name_second,followers_count_second,following_count_second));
+            uiobj.getElement("SecondUser").click();
 
-        log.info(name_second);
-        log.info(handle_name_second);
-        log.info(following_count_second);
-        log.info(followers_count_second);
+            Assert.assertTrue(uiobj.getElement("HandleNameSecond").isDisplayed());
+            String handle_name_second = uiobj.getElement("HandleNameSecond").getText();
+
+            Assert.assertTrue(uiobj.getElement("FollowingCountSecond").isDisplayed());
+            String following_count_second = uiobj.getElement("FollowingCountSecond").getText();
+
+            Assert.assertTrue(uiobj.getElement("FollowersCountSecond").isDisplayed());
+            String followers_count_second = uiobj.getElement("FollowersCountSecond").getText();
+
+            jslist.add(new JsonDataObject(name_second, handle_name_second, followers_count_second, following_count_second));
+
+            log.info(name_second);
+            log.info(handle_name_second);
+            log.info(following_count_second);
+            log.info(followers_count_second);
 
 
-        driver.navigate().back();
-        //To fetch third profile details
-        String name_third = uiobj.getElement("NameThird").getText();
+            driver.navigate().back();
+            //To fetch third profile details
+            String name_third = uiobj.getElement("NameThird").getText();
 
-        uiobj.getElement("ThirdUser").click();
+            uiobj.getElement("ThirdUser").click();
 
-        String handle_name_third = uiobj.getElement("HandleNameThird").getText();
-        String following_count_third = uiobj.getElement("FollowingCountThird").getText();
-        String followers_count_third = uiobj.getElement("FollowersCountThird").getText();
+            String handle_name_third = uiobj.getElement("HandleNameThird").getText();
+            String following_count_third = uiobj.getElement("FollowingCountThird").getText();
+            String followers_count_third = uiobj.getElement("FollowersCountThird").getText();
 
-        jslist.add(new JsonDataObject(name_third,handle_name_third,followers_count_third,following_count_third));
+            jslist.add(new JsonDataObject(name_third, handle_name_third, followers_count_third, following_count_third));
 
-        log.info(name_third);
-        log.info(handle_name_third);
-        log.info(following_count_third);
-        log.info(followers_count_third);
+            log.info(name_third);
+            log.info(handle_name_third);
+            log.info(following_count_third);
+            log.info(followers_count_third);
 
-        apiInfo.setBiographies(jslist);
-        report.addStepRow(apiInfo.toString("ui"),true);
-        driver.close();
-
+            apiInfo.setBiographies(jslist);
+            report.addStepRow(apiInfo.toString("ui"), true);
+            driver.close();
+        }
+        catch (Exception e){
+            log.info("Error Fetching the followers information");
+        }
     }
 
     @Test
